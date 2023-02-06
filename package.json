@@ -1,0 +1,21 @@
+{
+  "name": "sqlexam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.9.0",
+    "sequelize": "^6.28.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.19",
+    "ts-node": "^10.9.1"
+  }
+}
