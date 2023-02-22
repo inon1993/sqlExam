@@ -1,6 +1,5 @@
-export interface Client {
+export interface Supplier {
   id: string;
-  idNumber: string;
   name: string;
   address: string;
   phoneNumber: string;

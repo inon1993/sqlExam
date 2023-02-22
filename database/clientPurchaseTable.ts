@@ -7,7 +7,7 @@ type PurchaseSchemaModel = Model<AppModel["ClientPurchase"]>;
 
 export interface PurchaseInterface {
   insert: (
-    clientPurchase: Omit<AppModel["ClientPurchase"], "purchaseNumber">
+    clientPurchase: Omit<AppModel["ClientPurchase"], "id">
   ) => Promise<AppModel["ClientPurchase"]>;
 }
 
@@ -19,7 +19,7 @@ export async function createTable(
   const ClientPurchase = sequelize.define<PurchaseSchemaModel>(
     "client_purchase",
     {
-      purchaseNumber: {
+      id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -36,13 +36,6 @@ export async function createTable(
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      discount: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      purchaseDate: {
-        type: DataTypes.DATE,
-      },
     },
     {
       schema: "store_managment",
@@ -54,6 +47,18 @@ export async function createTable(
 
   return {
     async insert(clientPurchase) {
+      const catalogNumber = await Product.findByPk(
+        clientPurchase.catalogNumber
+      );
+      if (!catalogNumber) {
+        throw new Error(
+          `Product ID: ${clientPurchase.catalogNumber} not found`
+        );
+      }
+      const clientId = await Client.findByPk(clientPurchase.clientId);
+      if (!clientId) {
+        throw new Error(`Client ID ${clientPurchase.clientId} npt found`);
+      }
       const result = await ClientPurchase.create(
         clientPurchase as AppModel["ClientPurchase"]
       );

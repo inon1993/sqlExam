@@ -21,6 +21,11 @@ export async function createTable(
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
+      idNumber: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        unique: true,
+      },
       name: {
         type: DataTypes.TEXT,
         allowNull: false,

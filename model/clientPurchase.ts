@@ -1,8 +1,6 @@
 export interface ClientPurchase {
-  purchaseNumber: number;
+  id: number;
   catalogNumber: string;
   clientId: string;
   price: number;
-  discount: number;
-  purchaseDate: Date;
 }

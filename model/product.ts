@@ -1,8 +1,8 @@
+import { Model as AppModels } from ".";
+
 export interface Product {
   catalogNumber: string;
   name: string;
-  description: string;
-  sellPrice: number;
-  buyPrice: number;
-  stock: number;
+  supplier?: Array<AppModels["Product"]>;
+  price: number;
 }

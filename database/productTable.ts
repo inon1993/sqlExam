@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes, Model, ModelStatic } from "sequelize";
 import { Model as AppModel } from "../model";
 
-type ProductSchemaModel = Model<AppModel["Product"]>;
+type ProductSchemaModel = Model<Omit<AppModel["Product"], "supplier">>;
 
 export interface ProductInterface {
   Schema: ModelStatic<ProductSchemaModel>;
@@ -25,19 +25,7 @@ export async function createTable(
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      description: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      sellPrice: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      buyPrice: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      stock: {
+      price: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
